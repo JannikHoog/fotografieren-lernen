@@ -1,0 +1,13 @@
+{
+  "name": "Lichtfängerin – Fotografieren lernen",
+  "short_name": "Lichtfängerin",
+  "description": "Spielerisch Blende, Belichtungszeit und ISO lernen – für die Fujifilm X-T30 II.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FBF6F0",
+  "theme_color": "#FBF6F0",
+  "icons": [
+    { "src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
