@@ -16,18 +16,18 @@
   ];
 
   const BADGES = [
-    { id: "start",     icon: "🌱", name: "Erste Schritte",     hint: "Schließe deine erste Lektion ab." },
-    { id: "blende",    icon: "🔘", name: "Blenden-Bändigerin", hint: "Meistere die Lektion über die Blende." },
-    { id: "zeit",      icon: "⏱️", name: "Zeit-Jägerin",       hint: "Meistere die Lektion über die Belichtungszeit." },
-    { id: "iso",       icon: "🌙", name: "Nachteule",          hint: "Meistere die Lektion über ISO." },
-    { id: "dreieck",   icon: "△",  name: "Dreiecks-Denkerin",  hint: "Bring die Belichtung ins Gleichgewicht." },
-    { id: "raeder",    icon: "🎛️", name: "Rad-Beherrscherin",  hint: "Verstehe P, A, S und M an deiner X-T30 II." },
-    { id: "farbe",     icon: "🎞️", name: "Farbfühlerin",       hint: "Weißabgleich & Filmsimulationen gemeistert." },
-    { id: "auge",      icon: "🖼️", name: "Gutes Auge",         hint: "Bildgestaltung abgeschlossen." },
-    { id: "tueftler",  icon: "🧪", name: "Tüftlerin",          hint: "Löse 10 Aufgaben im Simulator." },
-    { id: "perfekt",   icon: "💯", name: "Quiz-Queen",         hint: "Beantworte 25 Quizfragen richtig." },
-    { id: "draussen",  icon: "📷", name: "Rausgeher-Diplom",   hint: "Hake 5 Foto-Missionen ab." },
-    { id: "komplett",  icon: "🏆", name: "Alles gelernt",      hint: "Schließe alle Lektionen ab." }
+    { id: "start",     icon: "spross",      name: "Erste Schritte",     hint: "Schließe deine erste Lektion ab." },
+    { id: "blende",    icon: "blende",      name: "Blenden-Bändigerin", hint: "Meistere die Lektion über die Blende." },
+    { id: "zeit",      icon: "zeit",        name: "Zeit-Jägerin",       hint: "Meistere die Lektion über die Belichtungszeit." },
+    { id: "iso",       icon: "iso",         name: "Nachteule",          hint: "Meistere die Lektion über ISO." },
+    { id: "dreieck",   icon: "waage",       name: "Dreiecks-Denkerin",  hint: "Bring die Belichtung ins Gleichgewicht." },
+    { id: "raeder",    icon: "raeder",      name: "Rad-Beherrscherin",  hint: "Verstehe P, A, S und M an deiner X-T30 II." },
+    { id: "farbe",     icon: "farbe",       name: "Farbfühlerin",       hint: "Weißabgleich & Filmsimulationen gemeistert." },
+    { id: "auge",      icon: "gestaltung",  name: "Gutes Auge",         hint: "Bildgestaltung abgeschlossen." },
+    { id: "tueftler",  icon: "tueftler",    name: "Tüftlerin",          hint: "Löse 10 Aufgaben im Simulator." },
+    { id: "perfekt",   icon: "hundert",     name: "Quiz-Queen",         hint: "Beantworte 25 Quizfragen richtig." },
+    { id: "draussen",  icon: "kamera",      name: "Rausgeher-Diplom",   hint: "Hake 5 Foto-Missionen ab." },
+    { id: "komplett",  icon: "erfolge",     name: "Alles gelernt",      hint: "Schließe alle Lektionen ab." }
   ];
 
   const DEFAULT = {
@@ -37,7 +37,10 @@
     solved: {},         // "simId:taskIdx" -> true
     quizRight: 0,
     missions: {},       // id -> true
+    paidMissions: {},   // id -> true (XP dafür schon vergeben)
+    paidQuiz: {},       // "lektion:frage" -> true (XP dafür schon vergeben)
     badges: {},         // id -> timestamp
+    ownGifs: [],        // selbst eingetragene GIF-Adressen
     lastVisit: null,
     streak: 0,
     seenIntro: false
@@ -116,7 +119,32 @@
       save();
       return !!data.missions[id];
     },
+    /** XP gibt es pro Mission nur einmal – auch nach Ab- und wieder Anhaken */
+    claimMission(id) {
+      if (data.paidMissions[id]) return false;
+      data.paidMissions[id] = true; save(); return true;
+    },
+    /** dito pro Quizfrage: eine richtige Antwort zählt nur beim ersten Mal */
+    claimQuiz(lessonId, index) {
+      const k = lessonId + ":" + index;
+      if (data.paidQuiz[k]) return false;
+      data.paidQuiz[k] = true; save(); return true;
+    },
     missionCount() { return Object.keys(data.missions).length; },
+
+    /* --- eigene GIFs --- */
+    gifs() { return (data.ownGifs || []).slice(); },
+    addGif(url) {
+      url = String(url || "").trim();
+      if (!/^https?:\/\/\S+$/i.test(url)) return "Das sieht nicht nach einer Adresse aus (sie muss mit http beginnen).";
+      if (!data.ownGifs) data.ownGifs = [];
+      if (data.ownGifs.includes(url)) return "Das GIF ist schon in der Liste.";
+      if (data.ownGifs.length >= 40) return "Mehr als 40 eigene GIFs gehen nicht.";
+      data.ownGifs.push(url); save(); return null;
+    },
+    removeGif(url) {
+      data.ownGifs = (data.ownGifs || []).filter(g => g !== url); save();
+    },
 
     hasBadge(id) { return !!data.badges[id]; },
     grantBadge(id) {

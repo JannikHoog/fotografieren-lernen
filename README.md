@@ -13,9 +13,16 @@ Der Fortschritt liegt ausschließlich im Browser (`localStorage`).
 - **Belichtungs-Simulator** – vier Szenen (Garten, Bewegung, Nacht, Wasserfall).
   Die Regler rechnen mit echten Belichtungswerten (EV) und zeigen live:
   Schärfentiefe & Bokeh, Bewegungsunschärfe, Verwacklung, Bildrauschen, Über-/Unterbelichtung
+- **Einzel-Modus**: In den Lektionen zu Blende, Zeit und ISO ist zunächst nur der eine
+  Regler frei – die Kamera hält die Helligkeit selbst konstant und führt den passenden
+  zweiten Wert nach. So sieht man die Wirkung *einer* Einstellung isoliert, ganz ohne
+  Nebenwirkung. Das entspricht genau der Blenden- bzw. Zeitpriorität an der echten Kamera.
+  Per Umschalter geht es dann zu „Alles selbst einstellen“ – wie im Modus M.
 - **Aufgaben im Simulator**, Quiz pro Lektion, **Foto-Missionen** für draußen
 - **Gamification** – XP, sieben Level, zwölf Abzeichen, Tages-Streak,
-  Konfetti und GIF-Belohnungen
+  Konfetti sowie GIF- und Sticker-Belohnungen
+- **Eigene Grafik** – alle Symbole und Szenenmotive sind selbstgezeichnete SVGs,
+  keine Emojis; dadurch sehen sie auf jedem Gerät und in jedem Browser gleich aus
 
 ## Lokal ansehen
 
@@ -48,16 +55,22 @@ App ablegen (`manifest.webmanifest` ist dabei).
 
 ## Eigene GIFs einsetzen
 
-Die Belohnungs-GIFs stehen in [`js/gifs.js`](js/gifs.js). Dort einfach eigene
-Links eintragen (auf giphy.com ein GIF suchen → Rechtsklick → „Bildadresse kopieren“).
-Lädt ein GIF nicht, zeigt die App automatisch einen animierten Emoji-Sticker –
-die Belohnung fällt also nie aus.
+Zwei Wege:
+
+1. **In der App**: unter *Erfolge → Eigene GIFs* eine Adresse einfügen. Sie bleibt
+   im Browser gespeichert und wird bei Belohnungen bevorzugt gezeigt.
+2. **Im Code**: die Listen in [`js/gifs.js`](js/gifs.js) erweitern.
+
+GIF-Adresse bekommt man auf giphy.com per Rechtsklick → „Bildadresse kopieren“
+(endet auf `.gif`). Lädt ein GIF nicht, zeigt die App automatisch einen animierten
+SVG-Sticker – die Belohnung fällt also nie aus.
 
 ## Aufbau
 
 ```
 index.html                Grundgerüst
 css/style.css             gesamtes Design
+js/icons.js               alle Symbole, Szenenmotive und Belohnungs-Sticker als SVG
 js/state.js               Fortschritt, XP, Level, Abzeichen (localStorage)
 js/sim.js                 Belichtungs-Simulator (EV-Rechnung + visuelle Effekte)
 js/lessons.js             alle Lerninhalte, Quizfragen und Missionen

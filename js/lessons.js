@@ -8,7 +8,7 @@ const L = [];
 
 /* ---------------------------------------------------------- 1 */
 L.push({
-  id: "licht", emoji: "△", tint: "sun", minutes: 5,
+  id: "licht", icon: "dreieck", tint: "sun", minutes: 5,
   title: "Das Licht-Dreieck",
   sub: "Warum es nur drei Regler gibt – und wie sie zusammenhängen.",
   cover: "tall",
@@ -20,9 +20,9 @@ L.push({
       genau darin liegt die ganze Kunst. Der AUTO-Modus wählt die Helligkeit für dich,
       aber die Nebenwirkungen wählt er auch. Und die will man selbst in der Hand haben.</p>` },
     { type: "cards", items: [
-      { k: "🔘", b: "Blende (f/…)", p: "Wie weit die Linse aufgeht. Nebenwirkung: <b>Schärfentiefe</b> – wie viel vom Bild scharf ist." },
-      { k: "⏱️", b: "Belichtungszeit", p: "Wie lange das Licht hereindarf. Nebenwirkung: <b>Bewegung</b> – eingefroren oder verwischt." },
-      { k: "🌙", b: "ISO", p: "Wie stark das Signal verstärkt wird. Nebenwirkung: <b>Rauschen</b> – Körnigkeit im Bild." }
+      { k: "blende", b: "Blende (f/…)", p: "Wie weit die Linse aufgeht. Nebenwirkung: <b>Schärfentiefe</b> – wie viel vom Bild scharf ist." },
+      { k: "zeit", b: "Belichtungszeit", p: "Wie lange das Licht hereindarf. Nebenwirkung: <b>Bewegung</b> – eingefroren oder verwischt." },
+      { k: "iso", b: "ISO", p: "Wie stark das Signal verstärkt wird. Nebenwirkung: <b>Rauschen</b> – Körnigkeit im Bild." }
     ]},
     { type: "text", html: `
       <h3>Alles wird in „Stufen“ gemessen</h3>
@@ -38,7 +38,7 @@ L.push({
     { type: "sim", sim: {
       id: "sim-licht", scene: "garden", focus: "all", aperture: 5.6, shutter: 1/250, iso: 400,
       tasks: [
-        { text: "Bring die Nadel genau in die Mitte (perfekt belichtet).", hint: "Schiebe irgendeinen Regler, bis „Perfekt ✓“ erscheint.",
+        { text: "Bring die Nadel genau in die Mitte (perfekt belichtet).", hint: "Schiebe irgendeinen Regler, bis die Waage „Perfekt“ anzeigt.",
           check: v => Math.abs(v.stops) <= 0.45 },
         { text: "Bleib perfekt belichtet – aber mit Blende f/2.8.", hint: "Wenn du die Blende öffnest, musst du woanders Licht wegnehmen.",
           check: v => v.N === 2.8 && Math.abs(v.stops) <= 0.45 },
@@ -69,7 +69,7 @@ L.push({
 
 /* ---------------------------------------------------------- 2 */
 L.push({
-  id: "blende", emoji: "🔘", tint: "coral", minutes: 7, badge: "blende",
+  id: "blende", icon: "blende", tint: "coral", minutes: 7, badge: "blende",
   title: "Die Blende",
   sub: "Der Regler für cremige Hintergründe – und für knackscharfe Landschaften.",
   blocks: [
@@ -84,9 +84,9 @@ L.push({
       Bei f/1.4 sind die Augen scharf und die Ohren schon leicht weich. Bei f/11 ist von der Blume bis
       zum Berg alles knackig.</p>` },
     { type: "cards", items: [
-      { k: "😍", b: "f/1.4 – f/2.8", p: "Offenblende. Für Porträts, Details, Freistellen. Hintergrund schmilzt zu Farbflecken (Bokeh)." },
-      { k: "👌", b: "f/4 – f/8", p: "Der Alltagsbereich. Genug Schärfe, noch schöne Trennung. f/8 ist oft der schärfste Punkt eines Objektivs." },
-      { k: "🏔️", b: "f/11 – f/16", p: "Landschaft, Architektur, Gruppenfotos. Alles scharf – kostet aber viel Licht." }
+      { k: "portrait", b: "f/1.4 – f/2.8", p: "Offenblende. Für Porträts, Details, Freistellen. Hintergrund schmilzt zu Farbflecken (Bokeh)." },
+      { k: "alltag", b: "f/4 – f/8", p: "Der Alltagsbereich. Genug Schärfe, noch schöne Trennung. f/8 ist oft der schärfste Punkt eines Objektivs." },
+      { k: "landschaft", b: "f/11 – f/16", p: "Landschaft, Architektur, Gruppenfotos. Alles scharf – kostet aber viel Licht." }
     ]},
     { type: "callout", kind: "warn", title: "Achtung, Falle", html:
       `<p>Noch weiter zu (f/22) macht das Bild nicht schärfer, sondern durch <b>Beugung</b> sogar wieder
@@ -96,14 +96,17 @@ L.push({
       <p>Schieb unten die Blende von f/22 nach f/1.4 und beobachte die Lichter im Hintergrund.
       Achte darauf, wie du dabei die Helligkeit nachkorrigieren musst.</p>` },
     { type: "sim", sim: {
-      id: "sim-blende", scene: "garden", focus: "aperture", aperture: 11, shutter: 1/250, iso: 400,
+      id: "sim-blende", scene: "garden", focus: "aperture", aperture: 5.6, shutter: 1/250, iso: 160,
       tasks: [
-        { text: "Mach den Hintergrund so cremig wie möglich – und halte die Belichtung korrekt.",
-          hint: "Blende weit auf (f/1.4), dann Zeit und ISO nachziehen.",
+        { text: "Mach den Hintergrund so cremig wie möglich.",
+          hint: "Blende ganz auf, Richtung f/1.4. Nur die Unschärfe darf sich ändern, die Helligkeit nicht.",
           check: v => v.N <= 2 && Math.abs(v.stops) <= 0.5 },
-        { text: "Jetzt das Gegenteil: alles scharf bis nach hinten, korrekt belichtet.",
-          hint: "f/11 oder kleiner – und dafür mehr Zeit oder mehr ISO.",
-          check: v => v.N >= 11 && Math.abs(v.stops) <= 0.5 }
+        { text: "Jetzt das Gegenteil: alles scharf bis nach hinten.",
+          hint: "f/11 oder kleiner. Achte darauf, wie die Lichtpunkte im Hintergrund schrumpfen.",
+          check: v => v.N >= 11 && Math.abs(v.stops) <= 0.5 },
+        { text: "Kür: Schalte auf „Alles selbst einstellen“ und triff f/2 punktgenau.",
+          hint: "Ohne Hilfe der Kamera: Blende auf f/2, dann Zeit und ISO so wählen, dass die Waage stimmt.",
+          check: v => v.mode === "frei" && v.N <= 2 && Math.abs(v.stops) <= 0.45 }
       ]}},
     { type: "callout", kind: "fuji", title: "An deiner X-T30 II", html:
       `<p>Beim <b>XF 18-55 f/2.8-4</b> drehst du die Blende direkt am Ring am Objektiv – ohne Beschriftung,
@@ -134,7 +137,7 @@ L.push({
 
 /* ---------------------------------------------------------- 3 */
 L.push({
-  id: "zeit", emoji: "⏱️", tint: "sky", minutes: 7, badge: "zeit",
+  id: "zeit", icon: "zeit", tint: "sky", minutes: 7, badge: "zeit",
   title: "Die Belichtungszeit",
   sub: "Bewegung einfrieren oder zu Malerei verwischen.",
   blocks: [
@@ -166,15 +169,18 @@ L.push({
       id: "sim-zeit", scene: "action", focus: "shutter", aperture: 16, shutter: 1/30, iso: 160,
       scenePicker: true,
       tasks: [
-        { text: "Frier das Fahrrad komplett ein – bei korrekter Belichtung.",
-          hint: "1/1000 oder kürzer. Das kostet Licht: Blende auf oder ISO hoch.",
+        { text: "Frier das Fahrrad komplett ein.",
+          hint: "1/1000 oder kürzer. Beobachte, wie die Blende dabei mitwandert.",
           check: v => v.moving && v.t <= 1/1000 && Math.abs(v.stops) <= 0.5 },
         { text: "Wechsle zur Wasserfall-Szene und zieh das Wasser seidig weich.",
-          hint: "Szene 💧 wählen, Zeit 1/4 s oder länger, Stativ an, dann abdunkeln (f/16, ISO 160).",
+          hint: "Szene „Wasserfall“ wählen, Zeit auf 1/4 s oder länger, Stativ anhaken.",
           check: v => v.water && v.t >= 1/4 && Math.abs(v.stops) <= 0.6 },
         { text: "Fotografiere ohne Stativ, ohne Verwacklungswarnung.",
           hint: "Stativ-Haken raus und Zeit auf 1/60 oder kürzer.",
-          check: v => !v.tripod && v.t <= 1/60 && Math.abs(v.stops) <= 0.6 }
+          check: v => !v.tripod && v.t <= 1/60 && Math.abs(v.stops) <= 0.6 },
+        { text: "Kür: Schalte auf „Alles selbst einstellen“ und friere die Bewegung selbst ein.",
+          hint: "1/1000 oder kürzer, und Blende und ISO von Hand so wählen, dass die Waage stimmt.",
+          check: v => v.mode === "frei" && v.t <= 1/1000 && Math.abs(v.stops) <= 0.5 }
       ]}},
     { type: "callout", kind: "fuji", title: "An deiner X-T30 II", html:
       `<p>Das <b>Zeitenrad</b> oben rechts stellt volle Stufen ein (1/125, 1/250 …). Steht es auf <b>A</b>,
@@ -201,7 +207,7 @@ L.push({
 
 /* ---------------------------------------------------------- 4 */
 L.push({
-  id: "iso", emoji: "🌙", tint: "plum", minutes: 6, badge: "iso",
+  id: "iso", icon: "iso", tint: "plum", minutes: 6, badge: "iso",
   title: "ISO",
   sub: "Der Notfall-Verstärker: Wie viel Rauschen ist okay?",
   blocks: [
@@ -218,10 +224,10 @@ L.push({
       <p>ISO ist also nicht „schlecht“ – ein leicht rauschendes, scharfes Bild ist tausendmal besser
       als ein sauberes, verwackeltes.</p>` },
     { type: "cards", items: [
-      { k: "✨", b: "ISO 160 – 400", p: "Draußen bei Tageslicht. Maximale Qualität, feinste Details." },
-      { k: "🙂", b: "ISO 800 – 1600", p: "Innenräume, Schatten, bewölkt. Sieht bei deiner Kamera noch top aus." },
-      { k: "🌃", b: "ISO 3200 – 6400", p: "Abends, Konzert, Kerzenlicht. Sichtbares Korn – oft charmant, wie Analogfilm." },
-      { k: "🆘", b: "ISO 12800+", p: "Nur wenn es sein muss. Details verschwimmen, Farben blassen aus." }
+      { k: "sonne", b: "ISO 160 – 400", p: "Draußen bei Tageslicht. Maximale Qualität, feinste Details." },
+      { k: "wolke", b: "ISO 800 – 1600", p: "Innenräume, Schatten, bewölkt. Sieht bei deiner Kamera noch top aus." },
+      { k: "nacht", b: "ISO 3200 – 6400", p: "Abends, Konzert, Kerzenlicht. Sichtbares Korn – oft charmant, wie Analogfilm." },
+      { k: "warnung", b: "ISO 12800+", p: "Nur wenn es sein muss. Details verschwimmen, Farben blassen aus." }
     ]},
     { type: "callout", kind: "zen", title: "Gute Nachricht", html:
       `<p>Der 26-MP-X-Trans-Sensor deiner X-T30 II ist bei hohen ISO-Werten richtig gut, und Fujis Korn sieht
@@ -235,8 +241,11 @@ L.push({
           hint: "Zeit maximal 1/60, Blende weit auf, ISO so weit hoch wie nötig.",
           check: v => v.scene === "night" && !v.tripod && v.t <= 1/60 && Math.abs(v.stops) <= 0.5 },
         { text: "Jetzt mit Stativ: gleiche Helligkeit, aber ISO 400 oder niedriger.",
-          hint: "Stativ anhaken, dann kannst du die Zeit lang machen und ISO runterziehen.",
-          check: v => v.scene === "night" && v.tripod && v.iso <= 400 && Math.abs(v.stops) <= 0.5 }
+          hint: "Stativ anhaken, dann darf die Zeit lang werden und der ISO-Wert runter.",
+          check: v => v.scene === "night" && v.tripod && v.iso <= 400 && Math.abs(v.stops) <= 0.5 },
+        { text: "Kür: Schalte auf „Alles selbst einstellen“ und belichte die Nacht von Hand korrekt.",
+          hint: "Ohne Hilfe: Blende, Zeit und ISO selbst so kombinieren, dass die Waage stimmt.",
+          check: v => v.mode === "frei" && v.scene === "night" && Math.abs(v.stops) <= 0.5 }
       ]}},
     { type: "callout", kind: "fuji", title: "An deiner X-T30 II", html:
       `<p>Die X-T30 II hat kein eigenes ISO-Rad. Am schnellsten geht's über die <b>Q-Taste</b> (Schnellmenü),
@@ -270,7 +279,7 @@ L.push({
 
 /* ---------------------------------------------------------- 5 */
 L.push({
-  id: "balance", emoji: "⚖️", tint: "sage", minutes: 6, badge: "dreieck",
+  id: "balance", icon: "waage", tint: "sage", minutes: 6, badge: "dreieck",
   title: "Belichtung ausbalancieren",
   sub: "Die Waage im Sucher lesen – und bewusst schummeln.",
   blocks: [
@@ -329,7 +338,7 @@ L.push({
 
 /* ---------------------------------------------------------- 6 */
 L.push({
-  id: "modi", emoji: "🎛️", tint: "coral", minutes: 6, badge: "raeder",
+  id: "modi", icon: "raeder", tint: "coral", minutes: 6, badge: "raeder",
   title: "P, A, S, M an deiner X-T30 II",
   sub: "Fuji hat kein Moduswahlrad – und das ist genial.",
   blocks: [
@@ -352,11 +361,11 @@ L.push({
       ignoriert die Kamera deine Räder komplett – dort wählst du mit dem <b>vorderen Wahlrad</b> nur noch
       ein Motivprogramm (oder AUTO, dann sucht die Kamera es selbst aus).</p>
       <p>In der anderen Stellung gehören P, S, A und M dir, gesteuert über Zeitenrad und Blende.
-      Diesen Hebel umzulegen ist buchstäblich dein erster Schritt raus aus dem Automatikmodus. 🎉</p>` },
+      Diesen Hebel umzulegen ist buchstäblich dein erster Schritt raus aus dem Automatikmodus.</p>` },
     { type: "cards", items: [
-      { k: "🎯", b: "Q-Taste", p: "Schnellmenü mit 16 Kacheln: ISO, Weißabgleich, Filmsimulation, AF-Modus. Halte Q gedrückt, um es dir umzubauen." },
-      { k: "🔘", b: "Fn-Tasten", p: "Halte eine Taste lange gedrückt, um ihr eine Funktion zuzuweisen – z. B. ISO oder Fokusmodus." },
-      { k: "👀", b: "Sucher-Ansicht", p: "Mit DISP/BACK schaltest du zwischen Infos, Histogramm und cleanem Bild um." }
+      { k: "gestaltung", b: "Q-Taste", p: "Schnellmenü mit 16 Kacheln: ISO, Weißabgleich, Filmsimulation, AF-Modus. Halte Q gedrückt, um es dir umzubauen." },
+      { k: "farbtupfer", b: "Fn-Tasten", p: "Halte eine Taste lange gedrückt, um ihr eine Funktion zuzuweisen – z. B. ISO oder Fokusmodus." },
+      { k: "auge", b: "Sucher-Ansicht", p: "Mit DISP/BACK schaltest du zwischen Infos, Histogramm und cleanem Bild um." }
     ]}
   ],
   quiz: [
@@ -374,7 +383,7 @@ L.push({
 
 /* ---------------------------------------------------------- 7 */
 L.push({
-  id: "fokus", emoji: "🎯", tint: "sky", minutes: 5,
+  id: "fokus", icon: "fokus", tint: "sky", minutes: 5,
   title: "Schärfe & Fokus",
   sub: "Die Augen müssen sitzen. Alles andere darf weich sein.",
   blocks: [
@@ -416,7 +425,7 @@ L.push({
 
 /* ---------------------------------------------------------- 8 */
 L.push({
-  id: "farbe", emoji: "🎞️", tint: "sun", minutes: 6, badge: "farbe",
+  id: "farbe", icon: "farbe", tint: "sun", minutes: 6, badge: "farbe",
   title: "Farbe & Filmsimulationen",
   sub: "Der Fuji-Zauber: Bilder, die direkt aus der Kamera schön sind.",
   blocks: [
@@ -428,26 +437,26 @@ L.push({
       Ein zu „warm“ eingestellter Sonnenuntergang wird noch goldener.</p>` },
     { type: "table", head: ["Weißabgleich", "Wirkung"], rows: [
       ["AWB", "Kamera entscheidet – meistens richtig"],
-      ["☀️ Tageslicht (5500 K)", "Neutral, gut für konstante Farben in Serien"],
-      ["☁️ Bewölkt (6500 K)", "Wärmer – lässt graue Tage freundlich aussehen"],
-      ["💡 Kunstlicht (3200 K)", "Kühlt orange Zimmerbeleuchtung raus"],
-      ["🌅 Schatten (7500 K)", "Sehr warm – schöner Sonnenuntergangs-Trick"]
+      ["{{i:sonne}} Tageslicht (5500 K)", "Neutral, gut für konstante Farben in Serien"],
+      ["{{i:wolke}} Bewölkt (6500 K)", "Wärmer – lässt graue Tage freundlich aussehen"],
+      ["{{i:gluehbirne}} Kunstlicht (3200 K)", "Kühlt orange Zimmerbeleuchtung raus"],
+      ["{{i:daemmerung}} Schatten (7500 K)", "Sehr warm – schöner Sonnenuntergangs-Trick"]
     ]},
     { type: "text", html: `
       <h3>Filmsimulationen – dein größter Vorteil</h3>
       <p>Fujifilm hat Jahrzehnte Filme gebaut und diese Looks in die Kamera gepackt. Sie wirken auf das
       JPEG direkt in der Kamera – du brauchst also gar keine Bearbeitung am Rechner.</p>` },
     { type: "cards", items: [
-      { k: "🟢", b: "PROVIA / Standard", p: "Der Allrounder für fast jedes Motiv. Natürlich, leicht kräftig." },
-      { k: "🔴", b: "Velvia / Vivid", p: "Knallige Farben, viel Kontrast. Landschaft, Herbstlaub, Sonnenuntergänge." },
-      { k: "🌸", b: "ASTIA / Soft", p: "Weichere Farbe und Kontraste. Porträts." },
-      { k: "🎬", b: "Classic Chrome", p: "Gedämpfte Farbe, mehr Schattenkontrast – ruhig und dokumentarisch. Street & Alltag." },
-      { k: "👤", b: "PRO Neg. Std / Hi", p: "Für Menschen: Std mit weichen Übergängen und schönen Hauttönen, Hi etwas kontrastreicher." },
-      { k: "📽️", b: "Classic Neg", p: "Kräftige Farben mit harter Tonwertkurve – gibt dem Bild Tiefe. Der beliebte Analog-Look." },
-      { k: "🎥", b: "ETERNA / Cinema", p: "Weiche Farben, reiche Schatten. Filmisch – für Video und ruhige Stimmungen." },
-      { k: "🎞️", b: "Eterna Bleach Bypass", p: "Wenig Sättigung, viel Kontrast. Eigenwillig und sehr stimmungsvoll." },
-      { k: "⚫", b: "ACROS", p: "Das beste Schwarzweiß der Kamera – wunderbares Korn. Wahlweise mit Gelb-, Rot- oder Grünfilter." },
-      { k: "🌗", b: "Monochrome", p: "Das schlichtere Schwarzweiß, ebenfalls mit Ye-, R- und G-Filter." }
+      { k: "farbtupfer", b: "PROVIA / Standard", tint: "#5F8F62", p: "Der Allrounder für fast jedes Motiv. Natürlich, leicht kräftig." },
+      { k: "farbtupfer", b: "Velvia / Vivid", tint: "#C7453F", p: "Knallige Farben, viel Kontrast. Landschaft, Herbstlaub, Sonnenuntergänge." },
+      { k: "portrait", b: "ASTIA / Soft", tint: "#DE8FA6", p: "Weichere Farbe und Kontraste. Porträts." },
+      { k: "kino", b: "Classic Chrome", tint: "#7A8792", p: "Gedämpfte Farbe, mehr Schattenkontrast – ruhig und dokumentarisch. Street & Alltag." },
+      { k: "portrait", b: "PRO Neg. Std / Hi", tint: "#B8825F", p: "Für Menschen: Std mit weichen Übergängen und schönen Hauttönen, Hi etwas kontrastreicher." },
+      { k: "film", b: "Classic Neg", tint: "#C2703A", p: "Kräftige Farben mit harter Tonwertkurve – gibt dem Bild Tiefe. Der beliebte Analog-Look." },
+      { k: "kino", b: "ETERNA / Cinema", tint: "#6E7F8C", p: "Weiche Farben, reiche Schatten. Filmisch – für Video und ruhige Stimmungen." },
+      { k: "film", b: "Eterna Bleach Bypass", tint: "#8A8F7A", p: "Wenig Sättigung, viel Kontrast. Eigenwillig und sehr stimmungsvoll." },
+      { k: "schwarzweiss", b: "ACROS", tint: "#3A3A3A", p: "Das beste Schwarzweiß der Kamera – wunderbares Korn. Wahlweise mit Gelb-, Rot- oder Grünfilter." },
+      { k: "schwarzweiss", b: "Monochrome", tint: "#6B6B6B", p: "Das schlichtere Schwarzweiß, ebenfalls mit Ye-, R- und G-Filter." }
     ]},
     { type: "callout", kind: "tip", title: "Die Farbfilter bei ACROS", html:
       `<p>Sie ahmen echte Schwarzweiß-Filter nach und ändern, wie Farben in Grau umgesetzt werden:
@@ -477,7 +486,7 @@ L.push({
 
 /* ---------------------------------------------------------- 9 */
 L.push({
-  id: "gestaltung", emoji: "🖼️", tint: "sage", minutes: 6, badge: "auge",
+  id: "gestaltung", icon: "gestaltung", tint: "sage", minutes: 6, badge: "auge",
   title: "Bildgestaltung",
   sub: "Technik ist die halbe Miete. Der Rest ist: wohin schaut das Auge?",
   blocks: [
@@ -485,12 +494,12 @@ L.push({
       <p>Du kannst alles technisch perfekt einstellen und trotzdem ein langweiliges Bild machen.
       Gestaltung ist die Frage: <b>Was lasse ich weg?</b></p>` },
     { type: "cards", items: [
-      { k: "⊞", b: "Drittelregel", p: "Teile das Bild gedanklich in 3×3. Setz dein Motiv auf eine Linie oder einen Schnittpunkt statt mittig." },
-      { k: "↗️", b: "Führende Linien", p: "Wege, Zäune, Geländer ziehen den Blick ins Bild – such sie bewusst." },
-      { k: "🖼️", b: "Rahmen im Rahmen", p: "Ein Türbogen, Äste, ein Fenster. Gibt Tiefe und Fokus." },
-      { k: "🧹", b: "Aufräumen", p: "Ein Schritt zur Seite und der Laternenmast wächst nicht mehr aus dem Kopf." },
-      { k: "🫧", b: "Negativer Raum", p: "Viel Leere um ein kleines Motiv wirkt ruhig und edel." },
-      { k: "🦵", b: "Perspektive", p: "Geh in die Hocke oder steig auf eine Bank. Augenhöhe ist selten die spannendste Höhe." }
+      { k: "gestaltung", b: "Drittelregel", p: "Teile das Bild gedanklich in 3×3. Setz dein Motiv auf eine Linie oder einen Schnittpunkt statt mittig." },
+      { k: "linien", b: "Führende Linien", p: "Wege, Zäune, Geländer ziehen den Blick ins Bild – such sie bewusst." },
+      { k: "rahmen", b: "Rahmen im Rahmen", p: "Ein Türbogen, Äste, ein Fenster. Gibt Tiefe und Fokus." },
+      { k: "besen", b: "Aufräumen", p: "Ein Schritt zur Seite und der Laternenmast wächst nicht mehr aus dem Kopf." },
+      { k: "leere", b: "Negativer Raum", p: "Viel Leere um ein kleines Motiv wirkt ruhig und edel." },
+      { k: "perspektive", b: "Perspektive", p: "Geh in die Hocke oder steig auf eine Bank. Augenhöhe ist selten die spannendste Höhe." }
     ]},
     { type: "callout", kind: "tip", title: "Licht schlägt alles", html:
       `<p>Die <b>goldene Stunde</b> (erste Stunde nach Sonnenaufgang, letzte vor Sonnenuntergang) macht fast
@@ -522,7 +531,7 @@ L.push({
 
 /* ---------------------------------------------------------- 10 */
 L.push({
-  id: "rezepte", emoji: "🍰", tint: "plum", minutes: 4,
+  id: "rezepte", icon: "spickzettel", tint: "plum", minutes: 4,
   title: "Spickzettel",
   sub: "Startwerte für typische Situationen – zum Nachmachen.",
   blocks: [
@@ -545,7 +554,7 @@ L.push({
       `<p>Technik ist nur da, damit sie dir nicht im Weg steht. Die besten Fotos entstehen nicht,
       weil jemand f/2.8 eingestellt hat, sondern weil jemand <b>hingeschaut</b> hat.
       Deine Einstellungen sollen so selbstverständlich werden wie Schalten beim Autofahren.
-      Und dahin kommst du nur, indem du <b>viel fotografierst</b>. 📷</p>` },
+      Und dahin kommst du nur, indem du <b>viel fotografierst</b>. {{i:kamera}}</p>` },
     { type: "sim", sim: {
       id: "sim-final", scene: "garden", focus: "all", aperture: 5.6, shutter: 1/125, iso: 400, scenePicker: true,
       tasks: [
@@ -553,7 +562,7 @@ L.push({
           hint: "Offene Blende, kurze Zeit, niedriger ISO.",
           check: v => v.N <= 2 && v.iso <= 400 && Math.abs(v.stops) <= 0.4 },
         { text: "Meisterprüfung: Nacht-Szene mit Stativ, ISO 160, korrekt belichtet.",
-          hint: "Szene 🌃 wählen, Stativ an, Zeit lang machen.",
+          hint: "Szene „Nacht“ wählen, Stativ an, Zeit lang machen.",
           check: v => v.scene === "night" && v.tripod && v.iso === 160 && Math.abs(v.stops) <= 0.5 }
       ]}}
   ],
@@ -569,18 +578,18 @@ L.push({
 
 /* ---------------------------------------------------------- Missionen */
 const MISSIONS = [
-  { id: "m1",  icon: "🔓", t: "Schieb den AUTO-Hebel weg von AUTO", p: "Und lass ihn dort. Das ist der Anfang von allem." },
-  { id: "m2",  icon: "🌸", t: "Ein Foto mit komplett unscharfem Hintergrund", p: "Offenblende, nah rangehen, Hintergrund weit weg." },
-  { id: "m3",  icon: "🏔️", t: "Ein Foto, auf dem von vorn bis hinten alles scharf ist", p: "f/8 bis f/11, Fokus etwa ins erste Drittel." },
-  { id: "m4",  icon: "💦", t: "Etwas Bewegtes einfrieren", p: "1/1000 s: springender Hund, Wasserhahn, ein Sprung." },
-  { id: "m5",  icon: "🌊", t: "Etwas absichtlich verwischen", p: "1/4 s oder länger, Kamera irgendwo auflegen." },
-  { id: "m6",  icon: "🌃", t: "Ein Foto nach Sonnenuntergang ohne Blitz", p: "ISO hoch, Blende auf, ruhig atmen." },
-  { id: "m7",  icon: "🎞️", t: "Dasselbe Motiv in drei Filmsimulationen", p: "Provia, Classic Chrome, Acros – welche magst du?" },
-  { id: "m8",  icon: "⊞",  t: "Ein Foto nach der Drittelregel", p: "Gitter einblenden, Motiv auf einen Schnittpunkt." },
-  { id: "m9",  icon: "🦵", t: "Ein Foto aus ungewöhnlicher Perspektive", p: "Vom Boden aus oder von oben herab." },
-  { id: "m10", icon: "🌇", t: "Ein Foto in der goldenen Stunde", p: "Eine Stunde vor Sonnenuntergang. Wecker stellen!" },
-  { id: "m11", icon: "🎛️", t: "Einen ganzen Spaziergang nur in Modus M", p: "Anstrengend, aber danach sitzt es." },
-  { id: "m12", icon: "💝", t: "Verschenke einen Abzug", p: "Ein gedrucktes Bild an jemanden, den du magst." }
+  { id: "m1",  icon: "schloss", t: "Schieb den AUTO-Hebel weg von AUTO", p: "Und lass ihn dort. Das ist der Anfang von allem." },
+  { id: "m2",  icon: "blume", t: "Ein Foto mit komplett unscharfem Hintergrund", p: "Offenblende, nah rangehen, Hintergrund weit weg." },
+  { id: "m3",  icon: "landschaft", t: "Ein Foto, auf dem von vorn bis hinten alles scharf ist", p: "f/8 bis f/11, Fokus etwa ins erste Drittel." },
+  { id: "m4",  icon: "tempo", t: "Etwas Bewegtes einfrieren", p: "1/1000 s: springender Hund, Wasserhahn, ein Sprung." },
+  { id: "m5",  icon: "wasser", t: "Etwas absichtlich verwischen", p: "1/4 s oder länger, Kamera irgendwo auflegen." },
+  { id: "m6",  icon: "nacht", t: "Ein Foto nach Sonnenuntergang ohne Blitz", p: "ISO hoch, Blende auf, ruhig atmen." },
+  { id: "m7",  icon: "film", t: "Dasselbe Motiv in drei Filmsimulationen", p: "Provia, Classic Chrome, Acros – welche magst du?" },
+  { id: "m8",  icon: "gestaltung",  t: "Ein Foto nach der Drittelregel", p: "Gitter einblenden, Motiv auf einen Schnittpunkt." },
+  { id: "m9",  icon: "perspektive", t: "Ein Foto aus ungewöhnlicher Perspektive", p: "Vom Boden aus oder von oben herab." },
+  { id: "m10", icon: "daemmerung", t: "Ein Foto in der goldenen Stunde", p: "Eine Stunde vor Sonnenuntergang. Wecker stellen!" },
+  { id: "m11", icon: "raeder", t: "Einen ganzen Spaziergang nur in Modus M", p: "Anstrengend, aber danach sitzt es." },
+  { id: "m12", icon: "geschenk", t: "Verschenke einen Abzug", p: "Ein gedrucktes Bild an jemanden, den du magst." }
 ];
 
 window.LESSONS = L;

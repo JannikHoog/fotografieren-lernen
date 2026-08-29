@@ -17,7 +17,7 @@
 
 <header class="topbar">
   <a class="brand" href="#/">
-    <span class="brand-mark" aria-hidden="true">◉</span>
+    <span class="brand-mark" aria-hidden="true"></span>
     <span class="brand-text">Lichtfängerin</span>
   </a>
   <div class="topbar-right">
@@ -32,16 +32,16 @@
 </header>
 
 <nav class="mainnav" id="mainnav">
-  <a href="#/" data-route="/">📚 <span>Lernen</span></a>
-  <a href="#/uebung" data-route="/uebung">🎛️ <span>Üben</span></a>
-  <a href="#/missionen" data-route="/missionen">🎯 <span>Missionen</span></a>
-  <a href="#/erfolge" data-route="/erfolge">🏆 <span>Erfolge</span></a>
+  <a href="#/" data-route="/" data-ico="lernen"><span>Lernen</span></a>
+  <a href="#/uebung" data-route="/uebung" data-ico="ueben"><span>Üben</span></a>
+  <a href="#/missionen" data-route="/missionen" data-ico="missionen"><span>Missionen</span></a>
+  <a href="#/erfolge" data-route="/erfolge" data-ico="erfolge"><span>Erfolge</span></a>
 </nav>
 
 <main id="view" class="view" tabindex="-1"></main>
 
 <footer class="foot">
-  <p>Mit ♥ gebaut zum Fotografieren-Lernen · <a href="#/erfolge">Fortschritt</a> wird nur in deinem Browser gespeichert.</p>
+  <p>Zum Fotografieren-Lernen gebaut · <a href="#/erfolge">Fortschritt</a> wird nur in deinem Browser gespeichert.</p>
 </footer>
 
 <!-- Belohnungs-Overlay -->
@@ -56,6 +56,7 @@
 <div class="confetti-layer" id="confetti" aria-hidden="true"></div>
 <div class="toast-wrap" id="toasts" aria-live="polite"></div>
 
+<script src="js/icons.js"></script>
 <script src="js/gifs.js"></script>
 <script src="js/state.js"></script>
 <script src="js/reward.js"></script>
