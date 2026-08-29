@@ -113,6 +113,9 @@ mark{background:linear-gradient(transparent 58%, var(--sun-soft) 58%); color:inh
 
 /* ---------- Layout ---------- */
 .view{max-width:var(--maxw); margin:0 auto; padding:clamp(18px,3.5vw,34px) clamp(16px,4vw,32px) 60px}
+/* Der Hauptbereich bekommt beim Seitenwechsel den Fokus (für Screenreader),
+   soll aber keinen sichtbaren Rahmen zeigen. */
+.view:focus, .view:focus-visible{outline:none}
 .foot{max-width:var(--maxw); margin:0 auto; padding:0 clamp(16px,4vw,32px) 40px; color:var(--muted); font-size:.82rem}
 
 /* ---------- Hero ---------- */
