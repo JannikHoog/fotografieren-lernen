@@ -108,7 +108,7 @@ L.push({
     { type: "callout", kind: "fuji", title: "An deiner X-T30 II", html:
       `<p>Beim <b>XF 18-55 f/2.8-4</b> drehst du die Blende direkt am Ring am Objektiv – ohne Beschriftung,
       der Wert erscheint im Sucher. Beim <b>XC 15-45</b> gibt es keinen Blendenring: Dort stellst du die
-      Blende mit dem <b>hinteren Wahlrad</b> ein.</p>
+      Blende mit dem <b>vorderen Wahlrad</b> ein.</p>
       <p>Wichtig: Steht der Blendenring auf <b>A</b>, wählt die Kamera die Blende selbst. Zum Üben:
       Ring von A wegdrehen, dann hast du die Kontrolle.</p>` },
     { type: "callout", kind: "tip", title: "Drei Tricks für mehr Unschärfe", html:
@@ -239,11 +239,19 @@ L.push({
           check: v => v.scene === "night" && v.tripod && v.iso <= 400 && Math.abs(v.stops) <= 0.5 }
       ]}},
     { type: "callout", kind: "fuji", title: "An deiner X-T30 II", html:
-      `<p>Die X-T30 II hat kein eigenes ISO-Rad. Am schnellsten geht's über die <b>Q-Taste</b> (Schnellmenü)
-      oder du legst ISO auf eine <b>Fn-Taste</b> bzw. eine Richtung des Steuerkreuzes.</p>
-      <p>Sehr praktisch: <b>Auto-ISO</b> mit eigenen Grenzen. Im Menü kannst du drei Auto-ISO-Profile anlegen,
-      z. B. „Maximum ISO 3200, Mindestverschlusszeit 1/125“. Dann regelt die Kamera ISO selbst, aber nur
-      innerhalb deiner Regeln – ideal, wenn du dich auf Blende und Zeit konzentrieren willst.</p>` }
+      `<p>Die X-T30 II hat kein eigenes ISO-Rad. Am schnellsten geht's über die <b>Q-Taste</b> (Schnellmenü),
+      über eine <b>Fn-Taste</b> (Menü → <i>Tasten-/Rad-Einstellung → Funktion (Fn)</i>) – oder du legst ISO
+      dauerhaft auf ein Wahlrad (<i>Tasten-/Rad-Einstellung → Wahlrad-Einstellung</i>).</p>
+      <p>Das Beste an deiner Kamera: <b>drei eigene Auto-ISO-Profile</b> (AUTO1, AUTO2, AUTO3). Für jedes
+      stellst du drei Dinge ein:</p>
+      <ul style="margin:0 0 1em;padding-left:1.1em">
+        <li><b>Standard-Empfindlichkeit</b> – wo die Kamera startet (ab Werk ISO 160)</li>
+        <li><b>Max. Empfindlichkeit</b> – deine Schmerzgrenze (ab Werk 800 / 3200 / 12800)</li>
+        <li><b>Längste Verschlusszeit</b> – ab hier dreht die Kamera lieber ISO hoch, statt die Zeit zu verlängern</li>
+      </ul>
+      <p>Genau das ist der Trick gegen verwackelte Bilder: Setz die längste Verschlusszeit auf <code>1/125</code>
+      und das Maximum auf ISO 3200. Dann darf die Kamera alles selbst regeln – aber nie so, dass es verwackelt
+      oder zu sehr rauscht. AUTO2 ist ab Werk schon fast dieses Profil.</p>` }
   ],
   quiz: [
     { q: "Was macht ISO physikalisch?",
@@ -282,7 +290,10 @@ L.push({
       Schnee <b>+1</b>, dunkle Szene <b>−1</b>. Das nennt sich <b>Belichtungskorrektur</b>.</p>` },
     { type: "callout", kind: "fuji", title: "An deiner X-T30 II", html:
       `<p>Rechts oben sitzt das <b>Belichtungskorrektur-Rad</b> (−3 bis +3). Ein Klick = 1/3 Stufe.
-      Auf Position <b>C</b> kannst du mit dem Frontrad sogar bis ±5 gehen.</p>
+      Auf Position <b>C</b> geht mehr: einmal auf die <b>Mitte des vorderen Wahlrads</b> drücken, dann
+      am Rad drehen – so kommst du über ±3 hinaus.</p>
+      <p>Kleine Einschränkung: Die Live-Vorschau zeigt Korrekturen jenseits von ±3 EV nicht mehr
+      wahrheitsgetreu. Dann hilft der Blick aufs Histogramm oder ein Probefoto.</p>
       <p>Riesenvorteil deiner Kamera: Der Sucher zeigt dir <b>live</b>, wie hell das Bild wird
       (WYSIWYG). Du musst dem Balken gar nicht blind vertrauen – du siehst das Ergebnis vorher.
       Nutze zusätzlich das <b>Histogramm</b> (im Sucher einblendbar): Klebt der Berg rechts an der Wand,
@@ -337,9 +348,11 @@ L.push({
       Unschärfe – die Kamera kümmert sich um den Rest. Das ist der Modus, in dem viele Profis 80 % ihrer
       Bilder machen. Danach: <b>S</b>, sobald sich etwas bewegt. <b>M</b> erst, wenn dich A und S ausbremsen.</p>` },
     { type: "callout", kind: "warn", title: "Der AUTO-Hebel", html:
-      `<p>Auf der Oberseite sitzt der kleine <b>Auto-Hebel</b>. Steht er auf AUTO, ignoriert die Kamera alle
-      deine Räder und macht ihr eigenes Ding. Schieb ihn weg von AUTO – das ist buchstäblich dein erster
-      Schritt raus aus dem Automatikmodus. 🎉</p>` },
+      `<p>Auf der Oberseite sitzt der kleine <b>Auto-Hebel</b> mit genau zwei Stellungen. In der Auto-Stellung
+      ignoriert die Kamera deine Räder komplett – dort wählst du mit dem <b>vorderen Wahlrad</b> nur noch
+      ein Motivprogramm (oder AUTO, dann sucht die Kamera es selbst aus).</p>
+      <p>In der anderen Stellung gehören P, S, A und M dir, gesteuert über Zeitenrad und Blende.
+      Diesen Hebel umzulegen ist buchstäblich dein erster Schritt raus aus dem Automatikmodus. 🎉</p>` },
     { type: "cards", items: [
       { k: "🎯", b: "Q-Taste", p: "Schnellmenü mit 16 Kacheln: ISO, Weißabgleich, Filmsimulation, AF-Modus. Halte Q gedrückt, um es dir umzubauen." },
       { k: "🔘", b: "Fn-Tasten", p: "Halte eine Taste lange gedrückt, um ihr eine Funktion zuzuweisen – z. B. ISO oder Fokusmodus." },
@@ -378,7 +391,9 @@ L.push({
       `<p>Vorne links sitzt der <b>Fokus-Wahlhebel</b> mit S / C / M. Mit dem <b>Joystick</b> schiebst du das
       Messfeld dorthin, wo es hin soll – viel präziser als „fokussieren und schwenken“.</p>
       <p>Im Menü <b>AF/MF → Gesichts-/Augenerkennung</b> einschalten: Die X-T30 II findet Augen zuverlässig.
-      Für Menschen ist das die halbe Miete. Für Details eher <b>Einzelfeld</b> plus Joystick.</p>` },
+      Für Menschen ist das die halbe Miete. Für Details eher <b>Einzelfeld</b> plus Joystick.</p>
+      <p>Noch ein Kniff aus demselben Menü: <b>PRE-AF</b>. Ist es an, stellt die Kamera schon scharf, bevor
+      du den Auslöser antippst – sie ist dadurch schneller bereit, braucht aber mehr Akku.</p>` },
     { type: "callout", kind: "tip", title: "Wenn's nicht scharf wird", html:
       `<ul style="margin:0;padding-left:1.1em">
         <li>Zu wenig Kontrast? Ziel eine Kante an, nicht eine glatte Fläche.</li>
@@ -423,21 +438,29 @@ L.push({
       <p>Fujifilm hat Jahrzehnte Filme gebaut und diese Looks in die Kamera gepackt. Sie wirken auf das
       JPEG direkt in der Kamera – du brauchst also gar keine Bearbeitung am Rechner.</p>` },
     { type: "cards", items: [
-      { k: "🟢", b: "PROVIA / Standard", p: "Der Allrounder. Natürlich, leicht kräftig." },
-      { k: "🔴", b: "Velvia", p: "Knallige Farben, viel Kontrast. Landschaft, Herbstlaub, Sonnenuntergänge." },
-      { k: "🌸", b: "ASTIA", p: "Weiche Kontraste, freundliche Hauttöne. Porträts." },
-      { k: "🎬", b: "Classic Chrome", p: "Zurückhaltend, dokumentarisch, leicht entsättigt. Street & Alltag." },
-      { k: "📽️", b: "Classic Neg", p: "Der Analog-Look mit kräftigen, eigenwilligen Farben. Sehr beliebt." },
-      { k: "🎥", b: "ETERNA", p: "Flach und filmisch, gedämpfte Farben. Video und ruhige Stimmungen." },
-      { k: "⚫", b: "ACROS", p: "Das beste Schwarzweiß der Kamera – wunderbares Korn." }
+      { k: "🟢", b: "PROVIA / Standard", p: "Der Allrounder für fast jedes Motiv. Natürlich, leicht kräftig." },
+      { k: "🔴", b: "Velvia / Vivid", p: "Knallige Farben, viel Kontrast. Landschaft, Herbstlaub, Sonnenuntergänge." },
+      { k: "🌸", b: "ASTIA / Soft", p: "Weichere Farbe und Kontraste. Porträts." },
+      { k: "🎬", b: "Classic Chrome", p: "Gedämpfte Farbe, mehr Schattenkontrast – ruhig und dokumentarisch. Street & Alltag." },
+      { k: "👤", b: "PRO Neg. Std / Hi", p: "Für Menschen: Std mit weichen Übergängen und schönen Hauttönen, Hi etwas kontrastreicher." },
+      { k: "📽️", b: "Classic Neg", p: "Kräftige Farben mit harter Tonwertkurve – gibt dem Bild Tiefe. Der beliebte Analog-Look." },
+      { k: "🎥", b: "ETERNA / Cinema", p: "Weiche Farben, reiche Schatten. Filmisch – für Video und ruhige Stimmungen." },
+      { k: "🎞️", b: "Eterna Bleach Bypass", p: "Wenig Sättigung, viel Kontrast. Eigenwillig und sehr stimmungsvoll." },
+      { k: "⚫", b: "ACROS", p: "Das beste Schwarzweiß der Kamera – wunderbares Korn. Wahlweise mit Gelb-, Rot- oder Grünfilter." },
+      { k: "🌗", b: "Monochrome", p: "Das schlichtere Schwarzweiß, ebenfalls mit Ye-, R- und G-Filter." }
     ]},
+    { type: "callout", kind: "tip", title: "Die Farbfilter bei ACROS", html:
+      `<p>Sie ahmen echte Schwarzweiß-Filter nach und ändern, wie Farben in Grau umgesetzt werden:
+      <b>+Ye</b> (Gelb) hebt den Kontrast leicht an und dunkelt den Himmel etwas ab, <b>+R</b> (Rot) macht
+      das deutlich dramatischer, <b>+G</b> (Grün) schmeichelt Hauttönen – der Porträt-Filter.</p>` },
     { type: "callout", kind: "fuji", title: "Tipp für Experimente", html:
       `<p>Stelle die Bildqualität auf <b>FINE + RAW</b>. Dann hast du das fertige, schöne JPEG mit deiner
       Filmsimulation <i>und</i> die RAW-Datei als Sicherheitsnetz. Aus dem RAW kannst du in der Kamera
-      selbst („RAW-Konvertierung“ im Wiedergabemenü) beliebig viele Varianten mit anderen Simulationen
-      entwickeln – ganz ohne Computer.</p>` },
+      selbst beliebig viele Varianten mit anderen Simulationen entwickeln – ganz ohne Computer:
+      Bild in der Wiedergabe anzeigen, <b>Q-Taste</b> drücken, Einstellungen wählen, fertig.</p>` },
     { type: "callout", kind: "zen", title: "Bracketing zum Spielen", html:
-      `<p>Im Antriebsmodus gibt es <b>Filmsimulations-Bracketing</b>: Ein Auslösen, drei JPEGs mit drei
+      `<p>Stell das <b>Antriebsrad auf BKT</b> und wähle unter <i>BKT1-/BKT2-Einstellung → BKT-Auswahl</i>
+      den Punkt <b>Filmsimulations-BKT</b>. Dann bekommst du mit einem Auslösen drei JPEGs mit drei
       verschiedenen Looks. Perfekt, um deinen Lieblingsfilm zu finden.</p>` }
   ],
   quiz: [
@@ -475,8 +498,14 @@ L.push({
       Augenhöhlen – dann lieber in den Schatten gehen. Und: <b>Gegenlicht</b> mit Blende f/2 gibt diesen
       leuchtenden Rand um Haare.</p>` },
     { type: "callout", kind: "fuji", title: "Hilfslinien einschalten", html:
-      `<p>Menü → Einrichtung → Bildschirmeinstellungen → <b>Rahmenhilfe</b>: Dort kannst du das 3×3-Gitter
-      einblenden. Es ist der beste Trainingspartner für dein Auge – nach ein paar Wochen brauchst du es nicht mehr.</p>` }
+      `<p>Zwei Schritte, weil die Gitter ab Werk aus sind:</p>
+      <ol style="margin:0;padding-left:1.2em">
+        <li>Menü → <i>Bildschirm-Einstellung → Rahmenhilfe</i> → <b>GITTER 9</b> (genau die Drittelregel;
+          es gibt außerdem GITTER 24 und HD-Rahmen)</li>
+        <li>Menü → <i>Bildschirm-Einstellung → Anzeige-Einstellungen</i> → <b>Rahmenhilfe</b> anhaken,
+          sonst bleibt das Gitter unsichtbar</li>
+      </ol>
+      <p>Es ist der beste Trainingspartner für dein Auge – nach ein paar Wochen brauchst du es nicht mehr.</p>` }
   ],
   quiz: [
     { q: "Was besagt die Drittelregel?",
