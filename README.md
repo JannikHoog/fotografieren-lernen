@@ -28,14 +28,17 @@ npx http-server -p 8080
 
 ## Kostenlos veröffentlichen (GitHub Pages)
 
-1. Diesen Branch nach `main` mergen
-2. Im Repository: **Settings → Pages → Source: GitHub Actions**
-3. Der Workflow `.github/workflows/pages.yml` veröffentlicht automatisch bei jedem Push
+Der Workflow `.github/workflows/pages.yml` veröffentlicht bei jedem Push auf den
+Standard-Branch und richtet GitHub Pages beim ersten Lauf selbst ein.
+
+**Voraussetzung:** GitHub Pages ist für private Repositories nur in bezahlten
+Plänen verfügbar. Für die kostenlose `github.io`-Adresse muss das Repository
+**öffentlich** sein (Settings → General → Danger Zone → Change visibility).
 
 Danach liegt die App unter `https://<benutzername>.github.io/fotografieren-lernen/`.
 
-Alternativ ohne Actions: **Settings → Pages → Source: Deploy from a branch → main / (root)**.
-Die Datei `.nojekyll` sorgt dafür, dass alles unverändert ausgeliefert wird.
+Veröffentlicht wird nur die App selbst (`index.html`, `css/`, `js/`, `assets/`) –
+der Ordner `docs/` mit dem Kamera-Handbuch bleibt außen vor.
 
 Genauso gut funktionieren Netlify, Vercel oder Cloudflare Pages – überall gilt:
 statische Seite, kein Build-Befehl, Ausgabeverzeichnis ist das Repo-Wurzelverzeichnis.

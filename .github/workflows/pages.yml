@@ -2,7 +2,9 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches:
+      - claude/photography-learning-app-esords
+      - main
   workflow_dispatch:
 
 permissions:
@@ -22,9 +24,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/configure-pages@v5
+        with:
+          # Richtet GitHub Pages beim ersten Lauf selbst ein
+          enablement: true
+
+      # Nur die eigentliche Web-App veröffentlichen – das Kamera-Handbuch
+      # und interne Dateien bleiben bewusst außen vor.
+      - name: Seite zusammenstellen
+        run: |
+          mkdir -p _site
+          cp -r index.html manifest.webmanifest .nojekyll css js assets _site/
+          ls -R _site
+
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
+
       - id: deployment
         uses: actions/deploy-pages@v4
